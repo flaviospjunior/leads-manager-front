@@ -14,6 +14,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
 import { Status } from './enums/Status';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { AvatarLetterComponent } from './components/avatar-letter/avatar-letter.component';
 
 @Component({
   selector: 'app-root',
@@ -31,6 +34,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     MatIconModule,
     MatDividerModule,
     MatProgressSpinnerModule,
+    AvatarLetterComponent,
   ],
   providers: [HttpClientModule],
   templateUrl: './app.component.html',
@@ -40,7 +44,11 @@ export class AppComponent {
   leads: Lead[];
   isLoading = true;
 
-  constructor(private leadService: LeadService) {
+  constructor(
+    private leadService: LeadService,
+    private router: Router,
+    private _snackBar: MatSnackBar
+  ) {
     this.isLoading = true;
     this.getAllLeads();
   }
@@ -58,21 +66,59 @@ export class AppComponent {
 
   acceptLead(leadId: string) {
     this.isLoading = true;
-    this.leadService
-      .changeLeadStatus(leadId, Status.Accepted)
-      .subscribe((response) => {
-        window.location.reload();
-      });
+    this.leadService.changeLeadStatus(leadId, Status.Accepted).subscribe({
+      next: (data) => {
+        this.isLoading = true;
+        setTimeout(() => {
+          this.reloadCurrentRoute();
+          this.getAllLeads();
+          this.isLoading = false;
+          this._snackBar.open(
+            `O Lead ${leadId} foi aceito com sucesso!`,
+            'OK',
+            {
+              duration: 5000,
+              panelClass: 'green-snackbar',
+            }
+          );
+        }, 1000);
+      },
+      error: (error) => {
+        console.log(error);
+      },
+    });
   }
 
   declineLead(leadId: string) {
     this.isLoading = true;
-    this.leadService
-      .changeLeadStatus(leadId, Status.Refused)
-      .subscribe((response) => {
-        window.location.reload();
-      });
+    this.leadService.changeLeadStatus(leadId, Status.Refused).subscribe({
+      next: (data) => {
+        this.isLoading = true;
+        setTimeout(() => {
+          this.reloadCurrentRoute();
+          this.getAllLeads();
+          this.isLoading = false;
+          this._snackBar.open(
+            `O Lead ${leadId} foi recusado com sucesso!`,
+            'OK',
+            {
+              duration: 5000,
+            }
+          );
+        }, 1000);
+      },
+      error: (error) => {
+        console.log(error);
+      },
+    });
   }
 
-  title = 'leads-manager-front';
+  reloadCurrentRoute() {
+    let currentUrl = this.router.url;
+    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+      this.router.navigate([currentUrl]);
+    });
+  }
+
+  title = 'Leads Manager';
 }

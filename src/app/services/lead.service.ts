@@ -4,6 +4,7 @@ import { ILeadResponse } from '../interfaces/ILeadResponse';
 import { Observable } from 'rxjs';
 import { Status } from '../enums/Status';
 
+const URL: string = 'https://localhost:7256/api/Lead';
 @Injectable({
   providedIn: 'root',
 })
@@ -11,13 +12,10 @@ export class LeadService {
   constructor(private http: HttpClient) {}
 
   public geaAllLeads(): Observable<ILeadResponse> {
-    return this.http.get<ILeadResponse>('https://localhost:7256/api/Lead');
+    return this.http.get<ILeadResponse>(URL);
   }
 
   public changeLeadStatus(leadId: string, status: Status) {
-    return this.http.patch<ILeadResponse>(
-      `https://localhost:7256/api/Lead/${leadId}/${status}`,
-      null
-    );
+    return this.http.patch<ILeadResponse>(`${URL}/${leadId}/${status}`, null);
   }
 }

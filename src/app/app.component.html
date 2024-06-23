@@ -1,16 +1,24 @@
-<mat-tab-group>
-  <mat-progress-spinner *ngIf="isLoading"></mat-progress-spinner>
-  <mat-tab class="tab" label="Invited">
+<mat-progress-spinner
+  [mode]="'indeterminate'"
+  *ngIf="isLoading"
+></mat-progress-spinner>
+<mat-tab-group class="tab">
+  <mat-tab label="Invited">
     <ng-container>
       <div class="divCard">
         <mat-card class="card" *ngFor="let lead of leads | leadsFilter : 0">
-          <mat-card-content class="firstContentCard">
-            <label>{{ lead.contactName | firstName }} </label>
-            <label class="">
-              {{ lead.creationDate | date : "longDate" }} &#64;
-              {{ lead.creationDate | date : "shortTime" }}
-            </label></mat-card-content
-          >
+          <div class="identificationSection">
+            <app-avatar-letter [name]="lead.contactName"></app-avatar-letter>
+            <mat-card-content class="firstContentCard">
+              <label class="nameLabel">{{
+                lead.contactName | firstName
+              }}</label>
+              <label>
+                {{ lead.creationDate | date : "longDate" }} &#64;
+                {{ lead.creationDate | date : "shortTime" }}
+              </label></mat-card-content
+            >
+          </div>
           <mat-divider></mat-divider>
           <mat-card-content class="secondContentCard"
             ><label class="labelWithIcon">
@@ -24,7 +32,7 @@
             <label class="labelWithIcon">
               <mat-icon
                 aria-hidden="false"
-                aria-label="Suburb"
+                aria-label="Category"
                 fontIcon="home_repair_service"
               ></mat-icon
               >{{ lead.category }}</label
@@ -32,15 +40,27 @@
             <label>Job Id: {{ lead.id }}</label>
           </mat-card-content>
           <mat-divider></mat-divider>
-          <mat-card-content class="thirdContentCard">{{
-            lead.description
-          }}</mat-card-content>
+          <mat-card-content class="thirdContentCard">
+            <label class="descriptionLabel">{{
+              lead.description
+            }}</label></mat-card-content
+          >
           <mat-divider></mat-divider>
           <mat-card-actions>
-            <button mat-flat-button (click)="acceptLead(lead.id)">
+            <button
+              class="actionButtons"
+              mat-flat-button
+              color="primary"
+              (click)="acceptLead(lead.id)"
+            >
               Accept
             </button>
-            <button mat-flat-button (click)="declineLead(lead.id)">
+            <button
+              class="actionButtons"
+              mat-flat-button
+              color="accent"
+              (click)="declineLead(lead.id)"
+            >
               Decline
             </button>
             <label
@@ -53,14 +73,67 @@
   </mat-tab>
   <mat-tab label="Accepted">
     <ng-container>
-      <div>
-        <mat-card *ngFor="let lead of leads | leadsFilter : 1">
-          <mat-card-content
-            >{{ lead.contactName }},
-            {{ lead.creationDate | date : "longDate" }}</mat-card-content
-          >
-          <mat-card-content>{{ lead.suburb }}, {{ lead.id }}</mat-card-content>
-          <mat-card-content>{{ lead.description }}</mat-card-content>
+      <div class="divCard">
+        <mat-card class="card" *ngFor="let lead of leads | leadsFilter : 1">
+          <div class="identificationSection">
+            <app-avatar-letter [name]="lead.contactName"></app-avatar-letter>
+            <mat-card-content class="firstContentCard">
+              <label class="nameLabel">{{
+                lead.contactName | firstName
+              }}</label>
+              <label>
+                {{ lead.creationDate | date : "longDate" }} &#64;
+                {{ lead.creationDate | date : "shortTime" }}
+              </label></mat-card-content
+            >
+          </div>
+          <mat-divider></mat-divider>
+          <mat-card-content class="secondContentCard"
+            ><label class="labelWithIcon">
+              <mat-icon
+                aria-hidden="false"
+                aria-label="Suburb"
+                fontIcon="pin_drop"
+              ></mat-icon
+              >{{ lead.suburb }}</label
+            >
+            <label class="labelWithIcon">
+              <mat-icon
+                aria-hidden="false"
+                aria-label="Category"
+                fontIcon="home_repair_service"
+              ></mat-icon
+              >{{ lead.category }}</label
+            >
+            <label class="labelWithIcon">Job Id: {{ lead.id }}</label>
+            <label class="labelWithIcon"
+              >{{ lead.finalPrice | currency : "USD" : true }} Lead Invitation
+            </label>
+          </mat-card-content>
+          <mat-divider></mat-divider>
+          <mat-card-content class="thirdContentAcceptCard">
+            <div class="contactInformationDiv">
+              <div class="labelWithIcon">
+                <mat-icon
+                  aria-hidden="false"
+                  aria-label="Phone Number"
+                  fontIcon="call"
+                ></mat-icon
+                ><label class="contactLabel">{{
+                  lead.contactPhoneNumber
+                }}</label>
+              </div>
+              <div class="labelWithIcon">
+                <mat-icon
+                  aria-hidden="false"
+                  aria-label="Email"
+                  fontIcon="mail"
+                ></mat-icon>
+                <label class="contactLabel">{{ lead.contactEmail }}</label>
+              </div>
+            </div>
+            <label class="descriptionLabel">{{ lead.description }}</label>
+          </mat-card-content>
         </mat-card>
       </div>
     </ng-container>

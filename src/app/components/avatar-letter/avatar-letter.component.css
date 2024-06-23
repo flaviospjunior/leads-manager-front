@@ -1,0 +1,17 @@
+.circle {
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  background: #ff9f42;
+  text-align: center;
+  vertical-align: center;
+  position: relative;
+}
+
+.centralized-initial {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: aliceblue;
+}

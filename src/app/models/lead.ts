@@ -10,7 +10,7 @@ export class Lead implements ILead {
   creationDate: Date;
   contactName: string;
   contactEmail: string;
-  contactNumber: string;
+  contactPhoneNumber: string;
   category: string;
   suburb: string;
 }

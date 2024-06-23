@@ -5,6 +5,10 @@
   background-color: #eeeeee;
 }
 
+.tab {
+  background-color: white;
+}
+
 .card {
   width: 50%;
   margin-left: auto;
@@ -17,7 +21,6 @@
   display: flex;
   flex-direction: column;
   align-items: start;
-  margin: 1px;
 }
 
 .secondContentCard {
@@ -38,15 +41,59 @@
   font-size: small;
 }
 
+.thirdContentAcceptCard {
+  height: auto;
+  margin: 1px;
+  padding: 5px;
+  margin-right: 10px;
+  font-size: small;
+  display: flex;
+  flex-direction: column;
+}
+
+.descriptionLabel {
+  padding: 5px;
+  margin-right: 10px;
+}
+
 .labelWithIcon {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
+  text-align: center;
   padding: 5px;
   margin-right: 10px;
   font-size: small;
 }
 
-.tab {
+mat-progress-spinner {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 5;
+}
+.contactInformationDiv {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+}
+
+.identificationSection {
+  display: flex;
+  flex-direction: row;
+  margin: 10px 10px 0 10px;
+}
+
+.nameLabel {
+  font-weight: bold;
+}
+.actionButtons {
+  margin: 5px;
+}
+
+.contactLabel {
+  color: #ff9f42;
+  font-weight: bold;
 }

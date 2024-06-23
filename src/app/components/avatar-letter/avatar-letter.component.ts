@@ -15,5 +15,7 @@ export class AvatarLetterComponent {
     return initial.toUpperCase();
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.getInitial();
+  }
 }

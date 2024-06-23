@@ -9,7 +9,7 @@ export interface ILead {
   creationDate: Date;
   contactName: string;
   contactEmail: string;
-  contactNumber: string;
+  contactPhoneNumber: string;
   category: string;
   suburb: string;
 }
