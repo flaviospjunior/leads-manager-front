@@ -1,0 +1,52 @@
+.divCard {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: #eeeeee;
+}
+
+.card {
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.firstContentCard {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  margin: 1px;
+}
+
+.secondContentCard {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 1px;
+  padding: 5px;
+  margin-right: 10px;
+  font-size: small;
+}
+
+.thirdContentCard {
+  height: 5vh;
+  margin: 1px;
+  padding: 5px;
+  margin-right: 10px;
+  font-size: small;
+}
+
+.labelWithIcon {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
+  margin-right: 10px;
+  font-size: small;
+}
+
+.tab {
+}
